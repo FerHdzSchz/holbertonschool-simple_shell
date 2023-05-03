@@ -74,6 +74,7 @@ int main(int ac, char **argv, char **environ)
             while (environ[i] != NULL)
             {
                 new_path = environ[i];
+                
                 if (execve(new_path, argv, environ) == -1)
                 {
                     printf("command not found in : %s\n", new_path);
