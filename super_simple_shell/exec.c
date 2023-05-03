@@ -9,20 +9,19 @@
  *
  * Return: Always 0.
  */
-int main(void)
+int main(int ac, char **argv, char **environ)
 {
-    /*
     pid_t child_pid;
     int status;
-    */
     size_t bufsize = 10;
     int i = 0;
     char *buffer = NULL;
     char *buffer_copy = NULL;
     int characters = 0, num_args = 0;
     char* token;
-    char **argv;
+    char* new_path;
 
+    (void)ac;
     while (1)
     {
         printf("$");
@@ -61,11 +60,7 @@ int main(void)
         }
         argv[i] = NULL;
 
-        if(execve(argv[0], argv, NULL) == -1)
-        {
-            printf("Error \n");
-        }
-/*
+
         child_pid = fork();
         if (child_pid == -1)
         {
@@ -74,21 +69,25 @@ int main(void)
         }
         if (child_pid == 0)
         {
-            printf("%s\n", argv[0]);
+            i = 0;
 
-            if (execve(argv[0], argv, NULL) == -1)
+            while (environ[i] != NULL)
             {
-                printf("Wait for me, wait for me\n");
-                printf("error");
+                new_path = environ[i];
+                if (execve(new_path, argv, environ) == -1)
+                {
+                    printf("command not found in : %s\n", new_path);
+                    printf("error\n");
+                    i++;
+                }
+                sleep(1);
             }
-            sleep(1);
         }
         else
         {
             wait(&status);
             printf("Oh, it's all better now\n");
         }
-*/
     }
 
     free(argv);
