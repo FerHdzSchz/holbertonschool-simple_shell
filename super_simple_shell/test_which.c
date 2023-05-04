@@ -20,5 +20,6 @@ int main(int ac, char **argv, char **env)
 	ruta_commando = _ispth(env);
 	*/
 	printf("%s", ruta_commando);
+	free(ruta_commando);
 	return (1);
 }

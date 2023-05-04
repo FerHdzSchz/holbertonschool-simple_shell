@@ -26,6 +26,7 @@ char *_which(char *argument, char **environ)
 		_strcat(suffix_pth, argument);
 		if (stat(suffix_pth, &st) == 0)
 		{
+			free(path);
 			return (suffix_pth);
 		}
 		token = strtok(NULL, ":");
