@@ -1,50 +1,38 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+
 
 /**
- * _which - finds program in PATH
- * 
+ * *_which - finds program in PATH
+ * @argument: pointer to the command to search
+ * @environ: pointer to pointer of environment variables
+ * Return: pointer to string of path
  */
 
-int main(int ac, char **argv, char **env)
+char *_which(char *argument, char **environ)
 {
-    unsigned int i;
-    struct  stat st;
-    char *pth;
+	char *path,  *token, *suffix_pth = NULL;
+	int i = 0;
+	struct  stat st;
 
-    if (ac < 2)
-    {
-        printf ("Usage: %s path_to_file...\n", argv[0]);
-    }
+	path = _ispth(environ);
+	token = strtok(path, ":");
+	suffix_pth = malloc(sizeof(char) * _strlen(path) + 1);
+	if (suffix_pth == NULL)
+		exit(-1);
+	while (token != NULL)
+	{
+		_strncpy(suffix_pth, token, _strlen(token) + 1);
+		_strcat(suffix_pth, "/");
+		_strcat(suffix_pth, argument);
+		if (stat(suffix_pth, &st) == 0)
+		{
+			return (suffix_pth);
+		}
+		token = strtok(NULL, ":");
+		i++;
+	}
 
-    i = 0;
-
-    while (env[i])
-    {
-        _strncpy(pth, env[i], 5);
-        if (pth == "PATH")
-        {
-            printf("PATH: \n%s", pth);
-        }
-
-        i++;
-    }
-
-    i = 1;
-    while (argv[i])
-    {
-        if (stat(argv[i], &st) == 0)
-        {
-            printf("FILE FOUND\n");
-        }
-        else
-        {
-            printf("FILE NOT FOUND\n");
-        }
-        i++;
-    }
-    return (0);
+	free(path);
+	free(suffix_pth);
+	return (NULL);
 }
