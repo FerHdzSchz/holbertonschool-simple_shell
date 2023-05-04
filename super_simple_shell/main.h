@@ -22,5 +22,6 @@ char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
 char *_which(char *argument, char **environ);
 char *_ispth(char **env_vars);
+char **parse_line(char *content, const char *sep);
 
 #endif
