@@ -11,7 +11,7 @@ char *_ispth(char **env_vars)
 	int i, j;
 	char *pth = NULL, *suffix_pth = NULL;
 
-	suffix_pth = malloc(sizeof(char) * 5) ;
+	suffix_pth = malloc(sizeof(char) * 5);
 	if (suffix_pth == NULL)
 	{
 		free(suffix_pth);
@@ -30,13 +30,13 @@ char *_ispth(char **env_vars)
 				exit(-1);
 			}
 			for (j = 5; j <= _strlen(env_vars[i]); j++)
-				{
-					pth[j - 5] = env_vars[i][j];
-				}
+			{
+				pth[j - 5] = env_vars[i][j];
+			}
 			break;
-	    }
+		}
 		i++;
-    }
+	}
 	free(suffix_pth);
 	return (pth);
 }
