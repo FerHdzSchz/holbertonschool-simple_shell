@@ -1,5 +1,11 @@
 #include "main.h"
-
+/**
+ * main - function to generate a simple shell
+ * @ac: number of parameters
+ * @argv: list of commands
+ * @env: environmente list
+ * Return: 1
+*/
 int main(int ac, char **argv, char **env)
 {
 	size_t buffsize = 0;
