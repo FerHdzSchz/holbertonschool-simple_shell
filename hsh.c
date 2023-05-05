@@ -6,7 +6,7 @@
  * @env: environmente list
  * Return: 1
 */
-int main(int ac, char **argv)
+int main(int ac, char **argv, char **env)
 {
 	size_t buffsize = 0;
 	int line_chars;
@@ -28,7 +28,7 @@ int main(int ac, char **argv)
 		}
 		argv = parse_line(buffer, separator);
 
-		complete_path = _which(argv[0], environ);
+		complete_path = _which(argv[0], env);
 		if (complete_path == NULL && stat(argv[0], &st) != 0)
 			{
 			free(buffer);
@@ -40,11 +40,11 @@ int main(int ac, char **argv)
 			exit(0);
 		else if (my_pid == 0)
 		{
-			if (execve(argv[0], argv, environ) == -1)
+			if (execve(argv[0], argv, env) == -1)
 			{
 				argv[0] = malloc(sizeof(char) * _strlen(complete_path) + 1);
 				argv[0] = complete_path;
-				if (execve(argv[0], argv, environ) == -1)
+				if (execve(argv[0], argv, env) == -1)
 				{
 					free(complete_path);
 					free(argv[0]);

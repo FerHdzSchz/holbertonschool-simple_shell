@@ -21,13 +21,19 @@ char *_which(char *argument, char **environ)
 		exit(-1);
 	while (token != NULL)
 	{
+		if (_strcmp(token, argument) == 0)
+			{
+				_strncpy(suffix_pth, argument, _strlen(argument) + 1);
+				free(path);
+				return(suffix_pth);
+			}
 		_strncpy(suffix_pth, token, _strlen(token) + 1);
 		_strcat(suffix_pth, "/");
 		_strcat(suffix_pth, argument);
 		if (stat(suffix_pth, &st) == 0)
 		{
 			free(path);
-			return (suffix_pth);
+			return(suffix_pth);
 		}
 		token = strtok(NULL, ":");
 		i++;
