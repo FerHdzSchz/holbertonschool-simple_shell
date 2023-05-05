@@ -70,6 +70,7 @@ int _strlen(char *s)
 		s++;
 		s_len++;
 	}
+	s_len++;
 	return (s_len);
 }
 
