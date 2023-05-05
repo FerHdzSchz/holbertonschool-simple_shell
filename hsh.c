@@ -48,6 +48,6 @@ int main(int ac, char **argv)
 		else
 			waitpid(my_pid, NULL, 0);
 	}
-	return (1);
+	return (0);
 }
 
