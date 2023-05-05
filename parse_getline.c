@@ -22,7 +22,6 @@ char **parse_line(char *content, const char *sep)
 		token = strtok(NULL, sep);
 		num_tokens++;
 	}
-
 	token = strtok(content, sep);
 	arg_list = malloc(sizeof(char *) * num_tokens + 1);
 	while (token != NULL)
