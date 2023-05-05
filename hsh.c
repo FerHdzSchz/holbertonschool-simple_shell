@@ -22,7 +22,7 @@ int main(int ac, char **argv)
 			printf("$ ");
 		line_chars = getline(&buffer, &buffsize, stdin);
 		if (line_chars == -1 || _strcmp(buffer, "exit") == 0)
-			exit(-1);
+			exit(0);
 		argv = malloc(sizeof(char *) * 10);
 		argv = parse_line(buffer, separator);
 
@@ -31,7 +31,7 @@ int main(int ac, char **argv)
 			continue;
 		my_pid = fork();
 		if (my_pid == -1)
-			exit(-1);
+			exit(0);
 		else if (my_pid == 0)
 		{
 			if (execve(argv[0], argv, environ) == -1)
@@ -41,7 +41,7 @@ int main(int ac, char **argv)
 				if (execve(argv[0], argv, environ) == -1)
 				{
 					free(argv);
-					exit(-1);
+					exit(0);
 				}
 			}
 		}
