@@ -23,14 +23,15 @@ int main(int ac, char **argv)
 		line_chars = getline(&buffer, &buffsize, stdin);
 		if (line_chars == -1 || _strcmp(buffer, "exit") == 0)
 		{
+			free(buffer);
 			exit(0);
 		}
-		argv = malloc(sizeof(char *) * 10);
 		argv = parse_line(buffer, separator);
 
 		complete_path = _which(argv[0], environ);
 		if (complete_path == NULL && stat(argv[0], &st) != 0)
 			{
+			free(buffer);
 			free(complete_path);
 			continue;
 			}
@@ -54,6 +55,7 @@ int main(int ac, char **argv)
 			free(argv);
 			free(argv[0]);
 			free(complete_path);
+			free(buffer);
 			sleep(3);
 		}
 		else
