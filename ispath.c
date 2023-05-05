@@ -8,7 +8,7 @@
 */
 char *_ispth(char **env_vars)
 {
-	int i, j;
+	int i = 0, j = 5;
 	char *pth = NULL, *suffix_pth = NULL;
 
 	suffix_pth = malloc(sizeof(char) * 5);
@@ -27,6 +27,7 @@ char *_ispth(char **env_vars)
 			pth = malloc((sizeof(char) * _strlen(env_vars[i])) - 4);
 			if (pth == NULL)
 			{
+				free(pth);
 				exit(-1);
 			}
 			for (j = 5; j <= _strlen(env_vars[i]); j++)

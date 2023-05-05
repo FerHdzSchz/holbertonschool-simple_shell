@@ -22,6 +22,8 @@ char **parse_line(char *content, const char *sep)
 		token = strtok(NULL, sep);
 		num_tokens++;
 	}
+	num_tokens++;
+	free(aux_buffer);
 	token = strtok(content, sep);
 	arg_list = malloc(sizeof(char *) * num_tokens + 1);
 	while (token != NULL)
@@ -29,6 +31,7 @@ char **parse_line(char *content, const char *sep)
 		arg_list[i] = malloc((sizeof(char) * _strlen(token)) + 1);
 		if (arg_list[i] == NULL)
 		{
+			free(arg_list[i]);
 			exit(-1);
 		}
 		_strncpy(arg_list[i], token, _strlen(token) + 1);
