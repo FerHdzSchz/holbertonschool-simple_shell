@@ -1,11 +1,9 @@
 #include "main.h"
 
- /**
-  * execute - program to fork and execute
-  * @argument_list: list of argumenrs
-  *
- */
-
+/**
+ * execute - executer function
+ * @argument_list: list of arguments
+*/
 void execute(char **argument_list)
 {
 	pid_t my_pid;
@@ -23,6 +21,7 @@ void execute(char **argument_list)
 	else
 		waitpid(my_pid, NULL, 0);
 }
+
 /**
  * replace_first - replaces first item of array of pointers
  * @arguments: list of pointers

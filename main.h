@@ -24,7 +24,6 @@ char *_which(char *argument);
 char *_ispth();
 char **copy_env(char **env);
 char **parse_line(char *content, const char *sep);
-int executer(char **arguments, char *comp_path);
 void execute(char **arguments);
 char **replace_first(char **arguments, char *replace);
 int is_empty(const char *s);
