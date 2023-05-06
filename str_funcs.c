@@ -38,9 +38,7 @@ return (dest);
 
 int _strcmp(char *s1, char *s2)
 {
-	int char_count;
-
-	char_count = 0;
+	int char_count = 0;
 
 	while (s1[char_count] != '\0' && s2[char_count] != '\0')
 	{
@@ -48,7 +46,7 @@ int _strcmp(char *s1, char *s2)
 		{
 			return (s1[char_count] - s2[char_count]);
 		}
-	char_count++;
+		char_count++;
 	}
 return (0);
 }
@@ -85,21 +83,22 @@ int _strlen(char *s)
 char *_strncpy(char *dest, char *src, int n)
 {
 
-int word_letter;
+	int word_letter;
 
-word_letter = 0;
-while (src[word_letter] != '\0' && word_letter < n)
-{
-dest[word_letter] = src[word_letter];
-word_letter++;
-}
-while (word_letter < n)
-{
-dest[word_letter] = '\0';
-word_letter++;
-}
+	word_letter = 0;
+	while (src[word_letter] != '\0' && word_letter < n)
+	{
+		dest[word_letter] = src[word_letter];
+		word_letter++;
+	}
 
-return (dest);
+	while (word_letter < n)
+	{
+		dest[word_letter] = '\0';
+		word_letter++;
+	}
+
+	return (dest);
 }
 
 /**

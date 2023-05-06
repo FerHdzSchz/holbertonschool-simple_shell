@@ -8,10 +8,10 @@
 */
 char **parse_line(char *content, const char *sep)
 {
-	char **arg_list;
-	char *aux_buffer;
-	char *token;
-	int num_tokens = 0, i = 0;
+	char **arg_list = NULL;
+	char *aux_buffer = NULL;
+	char *token = NULL;
+	int num_tokens = 0, i = 0, j = 0;
 
 	aux_buffer = malloc(sizeof(char) * _strlen(content) + 1);
 	_strncpy(aux_buffer, content, _strlen(content) + 1);
@@ -31,8 +31,12 @@ char **parse_line(char *content, const char *sep)
 		arg_list[i] = malloc((sizeof(char) * _strlen(token)) + 1);
 		if (arg_list[i] == NULL)
 		{
-			free(arg_list[i]);
-			exit(-1);
+			for (j = 0; j < i; j++)
+			{
+				free(arg_list[j]);
+			}
+			free(arg_list);
+			exit(EXIT_FAILURE);
 		}
 		_strncpy(arg_list[i], token, _strlen(token) + 1);
 		token = strtok(NULL, " \n");
