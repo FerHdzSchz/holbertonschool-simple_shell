@@ -134,10 +134,11 @@ char **copy_env(char **env)
 
 int is_empty(const char *s)
 {
-  while (*s != '\0') {
-    if (!isspace((unsigned char)*s))
-      return 0;
-    s++;
-  }
-  return 1;
+	while (*s != '\0')
+	{
+		if (!isspace((unsigned char)*s))
+			return (0);
+		s++;
+	}
+	return (1);
 }

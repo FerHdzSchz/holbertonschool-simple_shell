@@ -33,7 +33,7 @@ char **replace_first(char **arguments, char *replace)
 	if (arguments[0] == NULL)
 	{
 		free(arguments[0]);
-		return(NULL);
+		return (NULL);
 	}
 	arguments[0][len - 1] = '\0';
 	arguments[0] = replace;
