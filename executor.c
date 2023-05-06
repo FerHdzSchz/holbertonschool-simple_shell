@@ -23,7 +23,12 @@ void execute(char **argument_list)
 	else
 		waitpid(my_pid, NULL, 0);
 }
-
+/**
+ * replace_first - replaces first item of array of pointers
+ * @arguments: list of pointers
+ * @replace: pointer to replace first element
+ * Return: replaced argument list
+*/
 char **replace_first(char **arguments, char *replace)
 {
 	size_t len;
