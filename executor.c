@@ -46,7 +46,7 @@ void execute(char **argument_list)
 */
 char **replace_first(char **arguments, char *replace)
 {
-    size_t len, num_args = 0, i = 1, j = 0;
+	size_t len, num_args = 0, i = 1, j = 0;
 	char **new_args;
 
 	while (arguments[num_args] != NULL)
@@ -58,7 +58,7 @@ char **replace_first(char **arguments, char *replace)
 
 	new_args[num_args] = NULL;
 
-    len = _strlen(replace);
+	len = _strlen(replace);
 
 	new_args[0] = malloc(sizeof(char) * len  + 1);
 	if (new_args[0] == NULL)
@@ -83,6 +83,6 @@ char **replace_first(char **arguments, char *replace)
 	}
 	free(arguments);
 	free(replace);
-    return (new_args);
+	return (new_args);
 }
 

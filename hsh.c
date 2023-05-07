@@ -36,15 +36,11 @@ int main(int ac, char **argv)
 				continue;
 			}
 			new_argv = replace_first(argv, complete_path);
-			repl_counter++;
-			printf("Replcae counter: %i\n", repl_counter);
 			execute(new_argv);
 		}
 		else
 		{
 			execute(argv);
-			global_counter++;
-			printf("global_counter: %i\n", global_counter);
 		}
 	}
 	return (0);

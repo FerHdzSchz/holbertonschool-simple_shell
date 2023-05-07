@@ -46,8 +46,9 @@ char **parse_line(char *content, const char *sep)
 
 
 /**
- * num_tokens - gets the number of tokens
+ * count_tokens - gets the number of tokens
  * @string: string to parse
+ * @sep: separator string
  * Return: number of tokens
 */
 
