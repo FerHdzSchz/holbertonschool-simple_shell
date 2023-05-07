@@ -20,13 +20,13 @@ char *_strncpy(char *dest, char *src, int n);
 int _strlen(char *s);
 char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
-char *_which(char *argument);
-char *_ispth();
+char *_which(char *argument, char **envp);
+char *_ispth(char **envp);
 char **copy_env(char **env);
 char **parse_line(char *content, const char *sep);
 int count_tokens(char *string, const char *sep);
-void execute(char **arguments);
+void execute(char **arguments, char **envp);
 char **replace_first(char **arguments, char *replace);
-void _print_env(void);
+void _print_env(char **envp);
 int is_empty(const char *s);
 #endif

@@ -5,7 +5,7 @@
  * @argv: list of commands
  * Return: 1
 */
-int main(int ac, char **argv)
+int main(int ac, char **argv, char **env)
 {
 	size_t buffsize = 0;
 	int line_chars;
@@ -29,22 +29,22 @@ int main(int ac, char **argv)
 			continue;
 		if (_strcmp(buffer, str_env) == 0)
 		{
-			_print_env();
+			_print_env(env);
 		}
 		argv = parse_line(buffer, " \n");
 		if (stat(argv[0], &st) != 0)
 		{
-			complete_path = _which(argv[0]);
+			complete_path = _which(argv[0], env);
 			if (complete_path == NULL)
 			{
 				free(complete_path);
 				continue;
 			}
 			new_argv = replace_first(argv, complete_path);
-			execute(new_argv);
+			execute(new_argv, env);
 		}
 		else
-			execute(argv);
+			execute(argv, env);
 	}
 	return (0);
 }

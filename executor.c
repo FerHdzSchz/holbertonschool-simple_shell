@@ -3,8 +3,9 @@
 /**
  * execute - executer function
  * @argument_list: list of arguments
+ * @envp: environment
 */
-void execute(char **argument_list)
+void execute(char **argument_list, char **envp)
 {
 	int i = 0;
 	pid_t my_pid;
@@ -17,7 +18,7 @@ void execute(char **argument_list)
 	}
 	else if (my_pid == 0)
 	{
-		if (execve(argument_list[0], argument_list, environ) == -1)
+		if (execve(argument_list[0], argument_list, envp) == -1)
 			exit(EXIT_FAILURE);
 		while (argument_list[i] != NULL)
 		{
@@ -90,11 +91,11 @@ char **replace_first(char **arguments, char *replace)
  * _print_env - print environment
  *
 */
-void _print_env(void)
+void _print_env(char **envp)
 {
 	int i;
 
-	while (environ[i] == NULL)
+	while (envp[i] == NULL)
 	{
 		printf("%s", environ[i]);
 		i++;

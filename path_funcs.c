@@ -2,9 +2,10 @@
 
 /**
  * *_ispth - Function to get path from env
+ * @envp: enviroment
  * Return: String of PATH variable
 */
-char *_ispth()
+char *_ispth(char **envp)
 {
 	size_t i = 0;
 	int j = 5;
@@ -19,20 +20,20 @@ char *_ispth()
 	}
 	suffix_pth[5] = '\0';
 	i = 0;
-	while (environ[i] != NULL)
+	while (envp[i] != NULL)
 	{
-		_strncpy(suffix_pth, environ[i], 5);
+		_strncpy(suffix_pth, envp[i], 5);
 		if (_strcmp(suffix_pth, pth_str) == 0)
 		{
-			pth = malloc((sizeof(char) * _strlen(environ[i])));
+			pth = malloc((sizeof(char) * _strlen(envp[i])));
 			if (pth == NULL)
 			{
 				free(pth);
 				exit(-1);
 			}
-			for (j = 5; j <= _strlen(environ[i]); j++)
+			for (j = 5; j <= _strlen(envp[i]); j++)
 			{
-				pth[j - 5] = environ[i][j];
+				pth[j - 5] = envp[i][j];
 			}
 			break;
 		}
@@ -45,10 +46,11 @@ char *_ispth()
 /**
  * *_which - finds program in PATH
  * @argument: pointer to the command to search
+ * @envp: enviroment
  * Return: pointer to string of path
  */
 
-char *_which(char *argument)
+char *_which(char *argument, char **envp)
 {
 	char *path = NULL,  *token = NULL, *suffix_pth = NULL;
 	int i = 0;
@@ -57,7 +59,7 @@ char *_which(char *argument)
 	if (stat(argument, &st) == 0 || argument == NULL)
 		return (argument);
 
-	path = _ispth(environ);
+	path = _ispth(envp);
 	token = strtok(path, ":");
 	suffix_pth = malloc(sizeof(char) * _strlen(path) + _strlen(argument) + 2);
 	if (suffix_pth == NULL)
@@ -91,8 +93,8 @@ char *_which(char *argument)
 }
 
 /**
- * copy_env - copy environment list
- * @env: environment list
+ * copy_env - copy envpment list
+ * @env: envpment list
  * Return: copy of env list
 */
 
