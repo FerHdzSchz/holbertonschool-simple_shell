@@ -9,7 +9,7 @@ int main(int ac, char **argv)
 {
 	size_t buffsize = 0;
 	int line_chars;
-	char *buffer = NULL, *complete_path = NULL, *str_exit = "exit\n"
+	char *buffer = NULL, *complete_path = NULL, *str_exit = "exit\n";
 	char *str_env = "env\n";
 	struct stat st;
 	char **new_argv = NULL;
