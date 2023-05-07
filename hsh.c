@@ -8,7 +8,7 @@
 int main(int ac, char **argv)
 {
 	size_t buffsize = 0;
-	int line_chars, global_counter = 0, repl_counter = 0;
+	int line_chars;
 	char *buffer = NULL, *complete_path = NULL, *str_exit = "exit\n";
 	struct stat st;
 	char **new_argv = NULL;
