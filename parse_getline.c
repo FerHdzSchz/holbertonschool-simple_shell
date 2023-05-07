@@ -18,7 +18,6 @@ char **parse_line(char *content, const char *sep)
 	arg_list = malloc(sizeof(char *) * num_tokens + 1);
 	if (arg_list == NULL)
 	{
-		free(arg_list);
 		free(token);
 		exit(EXIT_FAILURE);
 	}
@@ -63,7 +62,6 @@ int count_tokens(char *string, const char *sep)
 	aux_buf = malloc(sizeof(char) * len + 1);
 	if (aux_buf == NULL)
 	{
-		free(aux_buf);
 		exit(EXIT_FAILURE);
 	}
 	_strncpy(aux_buf, string, len + 1);
@@ -75,7 +73,5 @@ int count_tokens(char *string, const char *sep)
 	}
 	n++;
 	free(aux_buf);
-	free(token);
-
 	return (n);
 }
