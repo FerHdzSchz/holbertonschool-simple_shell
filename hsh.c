@@ -3,6 +3,7 @@
  * main - function to generate a simple shell
  * @ac: number of parameters
  * @argv: list of commands
+ * @env: environment
  * Return: 1
 */
 int main(int ac, char **argv, char **env)
