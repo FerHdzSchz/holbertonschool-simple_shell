@@ -9,7 +9,8 @@ int main(int ac, char **argv)
 {
 	size_t buffsize = 0;
 	int line_chars;
-	char *buffer = NULL, *complete_path = NULL, *str_exit = "exit\n";
+	char *buffer = NULL, *complete_path = NULL, *str_exit = "exit\n"
+	char *str_env = "env\n";
 	struct stat st;
 	char **new_argv = NULL;
 
@@ -26,6 +27,10 @@ int main(int ac, char **argv)
 		}
 		if (is_empty(buffer) == 1)
 			continue;
+		if (_strcmp(buffer, str_env) == 0)
+		{
+			_print_env();
+		}
 		argv = parse_line(buffer, " \n");
 		if (stat(argv[0], &st) != 0)
 		{
@@ -39,9 +44,7 @@ int main(int ac, char **argv)
 			execute(new_argv);
 		}
 		else
-		{
 			execute(argv);
-		}
 	}
 	return (0);
 }

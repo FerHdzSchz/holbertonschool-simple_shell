@@ -27,5 +27,6 @@ char **parse_line(char *content, const char *sep);
 int count_tokens(char *string, const char *sep);
 void execute(char **arguments);
 char **replace_first(char **arguments, char *replace);
+void _print_env(void);
 int is_empty(const char *s);
 #endif

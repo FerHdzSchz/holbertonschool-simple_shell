@@ -86,3 +86,17 @@ char **replace_first(char **arguments, char *replace)
 	return (new_args);
 }
 
+/**
+ * _print_env - print environment
+ *
+*/
+void _print_env(void)
+{
+	int i;
+
+	while (environ[i] == NULL)
+	{
+		printf("%s", environ[i]);
+		i++;
+	}
+}
