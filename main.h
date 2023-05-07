@@ -24,6 +24,7 @@ char *_which(char *argument);
 char *_ispth();
 char **copy_env(char **env);
 char **parse_line(char *content, const char *sep);
+int count_tokens(char *string, const char *sep);
 void execute(char **arguments);
 char **replace_first(char **arguments, char *replace);
 int is_empty(const char *s);

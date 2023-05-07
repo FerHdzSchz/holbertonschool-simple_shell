@@ -8,9 +8,8 @@
 int main(int ac, char **argv)
 {
 	size_t buffsize = 0;
-	int line_chars, global_counter = 0;
+	int line_chars, global_counter = 0, repl_counter = 0;
 	char *buffer = NULL, *complete_path = NULL, *str_exit = "exit\n";
-	const char *separator = " \n";
 	struct stat st;
 
 	(void) ac;
@@ -26,25 +25,25 @@ int main(int ac, char **argv)
 		}
 		if (is_empty(buffer) == 1)
 			continue;
-		argv = parse_line(buffer, separator);
+		argv = parse_line(buffer, " \n");
 		if (stat(argv[0], &st) != 0)
 		{
 			complete_path = _which(argv[0]);
 			if (complete_path == NULL)
 			{
-				free(argv);
 				free(buffer);
+				free(argv[0]);
+				free(argv);
+				free(complete_path);
 				continue;
 			}
 			replace_first(argv, complete_path);
+			repl_counter++;
+			printf("%i\n", repl_counter);
 		}
-		global_counter++;
 		execute(argv);
-		if (global_counter > 1)
-		{
-			free(argv);
-			free(buffer);
-		}
-		}
+		global_counter++;
+		printf("global_counter: %i\n", global_counter);
+	}
 	return (0);
 }
