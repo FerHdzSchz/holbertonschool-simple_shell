@@ -25,6 +25,7 @@ char *_ispth(char **envp);
 char **copy_env(char **env);
 char **parse_line(char *content, const char *sep);
 int count_tokens(char *string, const char *sep);
+void free_arg_list(char **arg_list);
 void execute(char **arguments, char **envp);
 char **replace_first(char **arguments, char *replace);
 void _print_env(char **envp);

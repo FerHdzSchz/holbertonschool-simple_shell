@@ -69,7 +69,7 @@ char *_which(char *argument, char **envp)
 	{
 		if (_strcmp(token, argument) == 0)
 		{
-			_strncpy(suffix_pth, argument, _strlen(argument) + 1);
+			_strncpy(suffix_pth, argument, _strlen(argument));
 			free(path);
 			return (suffix_pth);
 		}

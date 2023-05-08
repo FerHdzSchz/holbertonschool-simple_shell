@@ -38,8 +38,12 @@ int main(int ac, char **argv, char **env)
 			complete_path = _which(argv[0], env);
 			if (complete_path == NULL)
 			{
-				free(complete_path);
-				continue;
+				if (execve(argv[0], argv, env) == -1)
+				{
+					free_arg_list(argv);
+					free(complete_path);
+					continue;
+				}
 			}
 			new_argv = replace_first(argv, complete_path);
 			execute(new_argv, env);

@@ -7,37 +7,48 @@
 */
 void execute(char **argument_list, char **envp)
 {
-	int i = 0;
 	pid_t my_pid;
 
 	my_pid = fork();
 	if (my_pid == -1)
 	{
-		free(argument_list);
+		free_arg_list(argument_list);
 		exit(0);
 	}
 	else if (my_pid == 0)
 	{
 		if (execve(argument_list[0], argument_list, envp) == -1)
-			exit(EXIT_FAILURE);
-		while (argument_list[i] != NULL)
 		{
-			free(argument_list[i]);
-			i++;
+			free_arg_list(argument_list);
+			free(argument_list);
+			exit(EXIT_FAILURE);
 		}
-		free(argument_list);
+		free_arg_list(argument_list);
 	}
 	else
 	{
-		while (argument_list[i] != NULL)
-		{
-			free(argument_list[i]);
-			i++;
-		}
-		free(argument_list);
+		free_arg_list(argument_list);
 		waitpid(my_pid, NULL, 0);
 	}
 }
+
+/**
+ * free_arg_list - free memory of arg_list
+ * @arg_list: argument lists
+*/
+
+void free_arg_list(char **arg_list)
+{
+	int i =0;
+
+	while (arg_list[i] != NULL)
+	{
+		free(arg_list[i]);
+		i++;
+	}
+	free(arg_list);
+}
+
 
 /**
  * replace_first - replaces first item of array of pointers
