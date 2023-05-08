@@ -20,6 +20,7 @@ char *_strncpy(char *dest, char *src, int n);
 int _strlen(char *s);
 char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
+int handler(int _chars, char *buff, char *cexit, char *cenv, char **env);
 char *_which(char *argument, char **envp);
 char *_ispth(char **envp);
 char **copy_env(char **env);

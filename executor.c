@@ -39,7 +39,7 @@ void execute(char **argument_list, char **envp)
 
 void free_arg_list(char **arg_list)
 {
-	int i =0;
+	int i = 0;
 
 	while (arg_list[i] != NULL)
 	{

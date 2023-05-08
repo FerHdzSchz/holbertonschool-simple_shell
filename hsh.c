@@ -9,9 +9,8 @@
 int main(int ac, char **argv, char **env)
 {
 	size_t buffsize = 0;
-	int line_chars;
-	char *buffer = NULL, *complete_path = NULL, *str_exit = "exit\n";
-	char *str_env = "env\n";
+	int line_chars, error_h;
+	char *buff = NULL, *c_pth = NULL, *str_exit = "exit\n", *str_env = "env\n";
 	struct stat st;
 	char **new_argv = NULL;
 
@@ -20,32 +19,26 @@ int main(int ac, char **argv, char **env)
 	{
 		if (isatty(0))
 			printf("$ ");
-		line_chars = getline(&buffer, &buffsize, stdin);
-		if (line_chars == -1 || _strcmp(buffer, str_exit) == 0)
-		{
-			free(buffer);
-			exit(0);
-		}
-		if (is_empty(buffer) == 1)
+		line_chars = getline(&buff, &buffsize, stdin);
+		error_h = handler(line_chars, buff, str_exit, str_env, env);
+		if (error_h == 3)
 			continue;
-		if (_strcmp(buffer, str_env) == 0)
-		{
-			_print_env(env);
-		}
-		argv = parse_line(buffer, " \n");
+		if (error_h == 2)
+			exit(0);
+		argv = parse_line(buff, " \n");
 		if (stat(argv[0], &st) != 0)
 		{
-			complete_path = _which(argv[0], env);
-			if (complete_path == NULL)
+			c_pth = _which(argv[0], env);
+			if (c_pth == NULL)
 			{
 				if (execve(argv[0], argv, env) == -1)
 				{
 					free_arg_list(argv);
-					free(complete_path);
+					free(c_pth);
 					continue;
 				}
 			}
-			new_argv = replace_first(argv, complete_path);
+			new_argv = replace_first(argv, c_pth);
 			execute(new_argv, env);
 		}
 		else
